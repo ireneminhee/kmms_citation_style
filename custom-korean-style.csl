@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<style xmlns="http://purl.org/net/xbiblio/csl" version="1.0" class="in-text">
+  <info>
+    <title>Custom Korean Institute IEEE-Compatible Style</title>
+    <id>http://example.com/custom-korean-style</id>
+    <link href="http://example.com/custom-korean-style" rel="self"/>
+    <author>
+      <name>ChatGPT Auto-Generated</name>
+    </author>
+    <category citation-format="numeric"/>
+    <category field="engineering"/>
+    <updated>2025-11-17T00:00:00+09:00</updated>
+    <summary>Custom CSL fully compatible with Mendeley, based on IEEE but following Korean institute rules.</summary>
+  </info>
+
+  <macro name="author">
+    <names variable="author" delimiter=", ">
+      <name initialize-with="." name-as-sort-order="all" and="text"/>
+      <et-al term="et-al" font-style="normal" et-al-min="7" et-al-use-first="6"/>
+    </names>
+  </macro>
+
+  <macro name="title">
+    <text variable="title" text-case="title" quotes="true"/>
+  </macro>
+
+  <macro name="container-title">
+    <text variable="container-title" font-style="italic" text-case="title"/>
+  </macro>
+
+  <macro name="journal-details">
+    <group delimiter=", ">
+      <text variable="volume" prefix="Vol. "/>
+      <text variable="issue" prefix="No. "/>
+      <text variable="page" prefix="pp. "/>
+      <date variable="issued">
+        <date-part name="year"/>
+      </date>
+    </group>
+  </macro>
+
+  <macro name="thesis-details">
+    <group delimiter=", ">
+      <text variable="genre"/>
+      <text variable="publisher"/>
+      <date variable="issued">
+        <date-part name="year"/>
+      </date>
+    </group>
+  </macro>
+
+  <macro name="web-details">
+    <group delimiter=", ">
+      <text variable="URL"/>
+      <date variable="accessed" prefix="(accessed " suffix=")">
+        <date-part name="month"/>
+        <date-part name="day" suffix=", "/>
+        <date-part name="year"/>
+      </date>
+    </group>
+  </macro>
+
+  <citation collapse="citation-number">
+    <sort>
+      <key variable="citation-number"/>
+    </sort>
+    <layout prefix="[" suffix="]" delimiter=", ">
+      <text variable="citation-number"/>
+    </layout>
+  </citation>
+
+  <bibliography et-al-min="7" et-al-use-first="6" line-spacing="1" entry-spacing="1">
+    <layout prefix="[" suffix="] " delimiter=", ">
+      <text variable="citation-number" suffix="] "/>
+      <group delimiter=", ">
+        <call macro="author"/>
+        <call macro="title"/>
+        <choose>
+          <if type="article-journal">
+            <call macro="container-title"/>
+            <call macro="journal-details"/>
+          </if>
+          <if type="book">
+            <call macro="container-title"/>
+            <text variable="publisher"/>
+            <text variable="publisher-place"/>
+            <date variable="issued">
+              <date-part name="year"/>
+            </date>
+          </if>
+          <if type="paper-conference">
+            <call macro="container-title"/>
+            <text variable="page" prefix="pp. "/>
+            <date variable="issued">
+              <date-part name="year"/>
+            </date>
+          </if>
+          <if type="thesis">
+            <call macro="thesis-details"/>
+          </if>
+          <if type="webpage">
+            <call macro="web-details"/>
+          </if>
+          <if type="report">
+            <call macro="container-title"/>
+            <text variable="number"/>
+            <date variable="issued">
+              <date-part name="year"/>
+            </date>
+          </if>
+          <if type="patent">
+            <text variable="title"/>
+            <text variable="number"/>
+            <text variable="publisher-place"/>
+            <date variable="issued">
+              <date-part name="year"/>
+            </date>
+          </if>
+        </choose>
+      </group>
+    </layout>
+  </bibliography>
+</style>
