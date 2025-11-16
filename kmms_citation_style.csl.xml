@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<style xmlns="http://purl.org/net/xbiblio/csl" version="1.0" class="in-text" demote-non-dropping-particle="sort-only">
+  <info>
+    <title>Custom Korean Institute IEEE-Variant Style</title>
+    <id>http://example.com/custom-korean-institute-ieee.csl</id>
+    <link href="http://example.com/custom-korean-institute-ieee.csl" rel="self"/>
+    <author>
+      <name>ChatGPT Auto-Generated</name>
+    </author>
+    <category citation-format="numeric"/>
+    <category field="engineering"/>
+    <updated>2025-11-17T00:00:00+09:00</updated>
+    <summary>Custom citation style based on IEEE but modified per Korean Institute reference rules.</summary>
+  </info>
+
+  <!-- GLOBAL FORMATTING -->
+  <macro name="author">
+    <names variable="author" delimiter=", ">
+      <name initialize-with="." name-as-sort-order="all" sort-separator=" "/>
+      <label form="short" prefix=" " text-case="lowercase"/>
+      <substitute>
+        <text variable="title"/>
+      </substitute>
+    </names>
+  </macro>
+
+  <macro name="editor">
+    <names variable="editor" delimiter=", ">
+      <name initialize-with="." name-as-sort-order="all"/>
+      <label form="short" prefix=" " text-case="lowercase"/>
+    </names>
+  </macro>
+
+  <macro name="title">
+    <text variable="title" text-case="title" quotes="true"/>
+  </macro>
+
+  <macro name="container-title">
+    <text variable="container-title" font-style="italic" text-case="title"/>
+  </macro>
+
+  <macro name="arxiv">
+    <group delimiter=", ">
+      <text value="arXiv Preprint"/>
+      <text variable="archive_location" prefix="arXiv:"/>
+    </group>
+  </macro>
+
+  <macro name="internet">
+    <group delimiter=", ">
+      <text variable="URL"/>
+      <date variable="accessed" prefix="(accessed " suffix=")">
+        <date-part name="month"/>
+        <date-part name="day" suffix=", "/>
+        <date-part name="year"/>
+      </date>
+    </group>
+  </macro>
+
+  <citation collapse="citation-number">
+    <sort>
+      <key variable="citation-number"/>
+    </sort>
+    <layout prefix="[" suffix="]" delimiter=", ">
+      <text variable="citation-number"/>
+    </layout>
+  </citation>
+
+  <bibliography entry-spacing="1" line-spacing="1" et-al-min="7" et-al-use-first="6">
+    <sort>
+      <key variable="citation-number"/>
+    </sort>
+
+    <layout prefix="[" suffix="]" delimiter=" ">
+      <text variable="citation-number" suffix="] "/>
+      <group delimiter=", ">
+        <call macro="author"/>
+        <call macro="title"/>
+        <choose>
+
+          <!-- JOURNAL ARTICLES -->
+          <if type="article-journal">
+            <group delimiter=", ">
+              <call macro="container-title"/>
+              <group delimiter=", ">
+                <text variable="volume" prefix="Vol. "/>
+                <text variable="issue" prefix="No. "/>
+                <text variable="page" prefix="pp. "/>
+              </group>
+              <date variable="issued">
+                <date-part name="year"/>
+              </date>
+            </group>
+          </if>
+
+          <!-- BOOKS -->
+          <if type="book">
+            <group delimiter=", ">
+              <call macro="container-title"/>
+              <text variable="publisher"/>
+              <text variable="publisher-place"/>
+              <date variable="issued">
+                <date-part name="year"/>
+              </date>
+            </group>
+          </if>
+
+          <!-- CONFERENCES -->
+          <if type="paper-conference">
+            <group delimiter=", ">
+              <call macro="container-title"/>
+              <text variable="page" prefix="pp. "/>
+              <date variable="issued">
+                <date-part name="year"/>
+              </date>
+            </group>
+          </if>
+
+          <!-- THESIS -->
+          <if type="thesis">
+            <group delimiter=", ">
+              <text variable="genre"/>
+              <text variable="publisher"/>
+              <date variable="issued">
+                <date-part name="year"/>
+              </date>
+            </group>
+          </if>
+
+          <!-- ARXIV -->
+          <if type="report" variable="archive_location">
+            <call macro="arxiv"/>
+          </if>
+
+          <!-- INTERNET -->
+          <if type="webpage">
+            <call macro="internet"/>
+          </if>
+
+          <!-- PATENT -->
+          <if type="patent">
+            <group delimiter=", ">
+              <text variable="title"/>
+              <text variable="number"/>
+              <text variable="publisher-place"/>
+              <date variable="issued">
+                <date-part name="year"/>
+              </date>
+            </group>
+          </if>
+
+        </choose>
+      </group>
+    </layout>
+  </bibliography>
+</style>
